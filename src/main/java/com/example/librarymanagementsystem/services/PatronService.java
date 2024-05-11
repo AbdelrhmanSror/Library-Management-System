@@ -9,7 +9,7 @@ public interface PatronService {
 
     PatronDTO getPatronById(Long id);
 
-    void addPatron(PatronDTO patron);
+    Long addPatron(PatronDTO patron);
 
     void updatePatron(Long id, PatronDTO patron);
 

@@ -31,8 +31,9 @@ public class PatronServiceImpl implements PatronService {
     }
 
     @Override
-    public void addPatron(PatronDTO patronDTO) {
-        patronRepository.save(convertToEntity(patronDTO));
+    public Long addPatron(PatronDTO patronDTO) {
+        Patron savedPatron = patronRepository.save(convertToEntity(patronDTO));
+        return savedPatron.getId();
     }
 
     @Override
