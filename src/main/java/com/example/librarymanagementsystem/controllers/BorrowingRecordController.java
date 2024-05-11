@@ -24,6 +24,7 @@ public class BorrowingRecordController {
     @Operation(summary = "Borrow a book")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Book borrowed successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad request"),
             @ApiResponse(responseCode = "404", description = "Not found")
     })
     @PostMapping("/borrow")
@@ -35,6 +36,7 @@ public class BorrowingRecordController {
     @Operation(summary = "Record the return of a borrowed book")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Book return recorded successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad request"),
             @ApiResponse(responseCode = "404", description = "Borrowing record not found")
     })
     @PostMapping("/return")
