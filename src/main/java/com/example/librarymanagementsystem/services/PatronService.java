@@ -1,17 +1,18 @@
 package com.example.librarymanagementsystem.services;
 
+import com.example.librarymanagementsystem.dtos.PatronDTO;
 import com.example.librarymanagementsystem.entities.Patron;
 
 import java.util.List;
 
 public interface PatronService {
-    List<Patron> getAllPatrons();
+    List<PatronDTO> getAllPatrons();
 
-    Patron getPatronById(Long id);
+    PatronDTO getPatronById(Long id);
 
-    Patron addPatron(Patron patron);
+    void addPatron(PatronDTO patron);
 
-    Patron updatePatron(Long id, Patron patron);
+    void updatePatron(Long id, PatronDTO patron);
 
     void deletePatron(Long id);
 }
