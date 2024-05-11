@@ -9,7 +9,7 @@ public interface BookService {
 
     BookDTO getBookById(Long id);
 
-    void addBook(BookDTO book);
+    Long addBook(BookDTO book);
 
     void updateBook(Long id, BookDTO book);
 

@@ -31,9 +31,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addBook(BookDTO bookDTO) {
-        bookRepository.save(convertToEntity(bookDTO));
+    public Long addBook(BookDTO bookDTO) {
+        Book savedBook = bookRepository.save(convertToEntity(bookDTO));
+        return savedBook.getId();
     }
+
 
     @Override
     public void updateBook(Long id, BookDTO bookDTO) {
