@@ -1,17 +1,18 @@
 package com.example.librarymanagementsystem.services;
 
+import com.example.librarymanagementsystem.dtos.BookDTO;
 import com.example.librarymanagementsystem.entities.Book;
 
 import java.util.List;
 
 public interface BookService {
-    List<Book> getAllBooks();
+    List<BookDTO> getAllBooks();
 
-    Book getBookById(Long id);
+    BookDTO getBookById(Long id);
 
-    Book addBook(Book book);
+    void addBook(BookDTO book);
 
-    Book updateBook(Long id, Book book);
+    void updateBook(Long id, BookDTO book);
 
     void deleteBook(Long id);
 }
