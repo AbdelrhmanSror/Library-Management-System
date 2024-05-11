@@ -1,7 +1,6 @@
 package com.example.librarymanagementsystem.services;
 
 import com.example.librarymanagementsystem.dtos.BookDTO;
-import com.example.librarymanagementsystem.entities.Book;
 
 import java.util.List;
 

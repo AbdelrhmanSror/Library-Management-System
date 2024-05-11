@@ -1,9 +1,7 @@
 package com.example.librarymanagementsystem.services;
 
-import com.example.librarymanagementsystem.dtos.BookDTO;
 import com.example.librarymanagementsystem.dtos.PatronDTO;
 import com.example.librarymanagementsystem.entities.Patron;
-import com.example.librarymanagementsystem.exceptions.BookNotFoundException;
 import com.example.librarymanagementsystem.exceptions.PatronNotFoundException;
 import com.example.librarymanagementsystem.repos.PatronRepository;
 import lombok.AllArgsConstructor;
