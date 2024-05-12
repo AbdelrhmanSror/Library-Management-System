@@ -41,42 +41,33 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws IOException {
         try {
             String requestURI = request.getRequestURI();
-            log.info("requestURI: " + requestURI);
             if (PathUri.isUriPermitted(requestURI)) {
                 filterChain.doFilter(request, response);
                 return;
             }
             log.info(request.getRequestURI());
             final String authHeader = request.getHeader("Authorization");
-            log.info("Authorization header is {} ", authHeader);
             final JwtToken jwtFromRequest = authHeader != null && (authHeader.startsWith("bearer") || authHeader.startsWith("Bearer")) ? JwtToken.builder().token(authHeader.substring(7)).build() : null;
             final String userId = jwtService.extractUserName(jwtFromRequest);
-            log.info("userid  is {} ", userId);
 
             if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                log.info("authentication  is {} ", SecurityContextHolder.getContext().getAuthentication());
                 UserDetails userDetails = geUserDetails(userId);
 
-                log.info("User details retrieved {} ", userDetails);
 
                 if (jwtService.isTokenValid(jwtFromRequest, userDetails)) {
-                    log.info("token is valid");
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails,
                             null,
                             userDetails.getAuthorities()
                     );
-                    log.info("UsernamePasswordAuthenticationToken token is {} ", authToken);
 
                     authToken.setDetails(
                             new WebAuthenticationDetailsSource().buildDetails(request)
                     );
                     SecurityContextHolder.getContext().setAuthentication(authToken);
-                    log.info("set auth in context ");
 
                 }
             }
-            log.info("calling  the last filter chain {}   ", response.getStatus());
 
             filterChain.doFilter(request, response);
         } catch (MalformedJwtException e) {
