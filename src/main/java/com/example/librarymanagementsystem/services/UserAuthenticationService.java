@@ -3,7 +3,6 @@ package com.example.librarymanagementsystem.services;
 
 import com.example.librarymanagementsystem.entities.UserCredential;
 import com.example.librarymanagementsystem.exceptions.UserNameDuplicateException;
-import com.example.librarymanagementsystem.model.AuthenticationCredentialsModel;
 import com.example.librarymanagementsystem.model.AuthenticationRequestModel;
 import com.example.librarymanagementsystem.model.AuthenticationResponseModel;
 import com.example.librarymanagementsystem.model.JwtToken;
@@ -23,7 +22,7 @@ public class UserAuthenticationService {
     private final UserCredentialRepository userCredentialRepository;
 
 
-    public void registerUser(AuthenticationCredentialsModel request) {
+    public void registerUser(AuthenticationRequestModel request) {
 
         // Check if the username already exists in the repository and throw an exception if yes
         throwUserNameDuplicateExceptionIfUserWithNameExist(request.getUsername());
@@ -48,7 +47,7 @@ public class UserAuthenticationService {
 
     public AuthenticationResponseModel authenticate(AuthenticationRequestModel request) {
 
-        JwtToken token = credentialService.authenticateUser(AuthenticationCredentialsModel.builder()
+        JwtToken token = credentialService.authenticateUser(AuthenticationRequestModel.builder()
                 .password(request.getPassword())
                 .username(request.getUsername()).build());
         return AuthenticationResponseModel.builder()

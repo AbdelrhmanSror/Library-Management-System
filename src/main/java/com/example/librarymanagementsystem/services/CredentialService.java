@@ -2,7 +2,7 @@ package com.example.librarymanagementsystem.services;
 
 
 import com.example.librarymanagementsystem.exceptions.UserBadCredentialException;
-import com.example.librarymanagementsystem.model.AuthenticationCredentialsModel;
+import com.example.librarymanagementsystem.model.AuthenticationRequestModel;
 import com.example.librarymanagementsystem.model.JwtToken;
 import com.example.librarymanagementsystem.repos.UserCredentialRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class CredentialService {
     }
 
 
-    public JwtToken authenticateUser(AuthenticationCredentialsModel request) {
+    public JwtToken authenticateUser(AuthenticationRequestModel request) {
         // Find the user by username in the repository
         var user = userCredentialRepository.findByUsername(request.getUsername()).orElseThrow(UserBadCredentialException::new);
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {

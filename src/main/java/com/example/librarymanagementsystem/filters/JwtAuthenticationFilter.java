@@ -45,7 +45,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
-            log.info(request.getRequestURI());
             final String authHeader = request.getHeader("Authorization");
             final JwtToken jwtFromRequest = authHeader != null && (authHeader.startsWith("bearer") || authHeader.startsWith("Bearer")) ? JwtToken.builder().token(authHeader.substring(7)).build() : null;
             final String userId = jwtService.extractUserName(jwtFromRequest);
@@ -68,6 +67,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 }
             }
+
 
             filterChain.doFilter(request, response);
         } catch (MalformedJwtException e) {
