@@ -5,6 +5,8 @@ import com.example.librarymanagementsystem.entities.Patron;
 import com.example.librarymanagementsystem.exceptions.PatronNotFoundException;
 import com.example.librarymanagementsystem.repos.PatronRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +14,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
+@CacheConfig(cacheNames = "patrons")
 @Service
 public class PatronServiceImpl implements PatronService {
 
     private final PatronRepository patronRepository;
 
+    @Cacheable(key = "'allPatrons'")
     @Override
     public List<PatronDTO> getAllPatrons() {
         return patronRepository.findAll().stream()
@@ -24,6 +28,7 @@ public class PatronServiceImpl implements PatronService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(key = "#id")
     @Override
     public PatronDTO getPatronById(Long id) {
         Optional<PatronDTO> optionalPatronDTO = patronRepository.findById(id).map(this::convertToDTO);

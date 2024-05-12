@@ -5,6 +5,8 @@ import com.example.librarymanagementsystem.entities.Book;
 import com.example.librarymanagementsystem.exceptions.BookNotFoundException;
 import com.example.librarymanagementsystem.repos.BookRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +14,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
+@CacheConfig(cacheNames = "books")
 @Service
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
+    @Cacheable(key = "'allBooks'")
     @Override
     public List<BookDTO> getAllBooks() {
         return bookRepository.findAll().stream()
@@ -24,6 +28,7 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(key = "#id")
     @Override
     public BookDTO getBookById(Long id) {
         Optional<BookDTO> optionalBookDTO = bookRepository.findById(id).map(this::convertToDTO);
