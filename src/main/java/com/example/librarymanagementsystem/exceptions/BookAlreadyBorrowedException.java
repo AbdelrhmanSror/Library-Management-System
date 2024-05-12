@@ -1,11 +1,20 @@
 package com.example.librarymanagementsystem.exceptions;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
-public class BookAlreadyBorrowedException extends ResponseStatusException {
+public class BookAlreadyBorrowedException extends CustomException {
 
     public BookAlreadyBorrowedException() {
-        super(HttpStatus.BAD_REQUEST, "Book already borrowed");
+        super("Book already borrowed");
+    }
+
+    @Override
+    public int getCustomCode() {
+        return 452;
+    }
+
+    @Override
+    public HttpStatus getStatus() {
+        return HttpStatus.BAD_REQUEST;
     }
 }

@@ -1,11 +1,20 @@
 package com.example.librarymanagementsystem.exceptions;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
-public class BorrowingRecordNotFoundException extends ResponseStatusException {
+public class BorrowingRecordNotFoundException extends CustomException {
 
     public BorrowingRecordNotFoundException() {
-        super(HttpStatus.NOT_FOUND, "Borrowing record not found");
+        super("Borrowing record not found");
+    }
+
+    @Override
+    public HttpStatus getStatus() {
+        return HttpStatus.NOT_FOUND;
+    }
+
+    @Override
+    public int getCustomCode() {
+        return 454;
     }
 }

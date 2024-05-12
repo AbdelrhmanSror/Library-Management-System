@@ -1,11 +1,21 @@
 package com.example.librarymanagementsystem.exceptions;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
-public class PatronNotFoundException extends ResponseStatusException {
+public class PatronNotFoundException extends CustomException {
+
 
     public PatronNotFoundException() {
-        super(HttpStatus.NOT_FOUND, "Patron not found");
+        super("Patron not found");
+    }
+
+    @Override
+    public HttpStatus getStatus() {
+        return HttpStatus.NOT_FOUND;
+    }
+
+    @Override
+    public int getCustomCode() {
+        return 455;
     }
 }

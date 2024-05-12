@@ -1,11 +1,20 @@
 package com.example.librarymanagementsystem.exceptions;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
-public class BookNotFoundException extends ResponseStatusException {
+public class BookNotFoundException extends CustomException {
 
     public BookNotFoundException() {
-        super(HttpStatus.NOT_FOUND, "Book not found");
+        super("Book not found");
+    }
+
+    @Override
+    public HttpStatus getStatus() {
+        return HttpStatus.NOT_FOUND;
+    }
+
+    @Override
+    public int getCustomCode() {
+        return 453;
     }
 }
