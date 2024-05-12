@@ -36,7 +36,6 @@ class UserAuthenticationControllerTest {
         AuthenticationRequestModel request = createAuthenticationRequest("name", "password");
         // When
         ResponseEntity<AuthenticationResponseModel> response = restTemplate.postForEntity("/api/v1/authentication", request, AuthenticationResponseModel.class);
-        log.info("Successfully authenticated {}", response.getBody());
         // Then
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
