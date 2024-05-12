@@ -26,7 +26,7 @@ public class BorrowingRecordServiceImpl implements BorrowingRecordService {
     private final PatronRepository patronRepository;
 
     @Override
-    public void borrowBook(Long bookId, Long patronId) {
+    public Long borrowBook(Long bookId, Long patronId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(BookNotFoundException::new);
 
@@ -47,7 +47,7 @@ public class BorrowingRecordServiceImpl implements BorrowingRecordService {
                 .borrowingDate(borrowingDate)
                 .build();
 
-        borrowingRecordRepository.save(borrowingRecord);
+        return borrowingRecordRepository.save(borrowingRecord).getId();
     }
 
     @Override

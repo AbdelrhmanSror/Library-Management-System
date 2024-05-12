@@ -28,9 +28,9 @@ public class BorrowingRecordController {
             @ApiResponse(responseCode = "404", description = "Not found")
     })
     @PostMapping("/borrow")
-    public ResponseEntity<String> borrowBook(@RequestBody BorrowingRequestModel request) {
-        borrowingRecordService.borrowBook(request.getBookId(), request.getPatronId());
-        return ResponseEntity.status(HttpStatus.CREATED).body("Book borrowed successfully");
+    public ResponseEntity<Long> borrowBook(@RequestBody BorrowingRequestModel request) {
+        Long recordId = borrowingRecordService.borrowBook(request.getBookId(), request.getPatronId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(recordId);
     }
 
     @Operation(summary = "Record the return of a borrowed book")
