@@ -95,7 +95,7 @@ From the Swagger UI, you can explore and interact with the available endpoints, 
       }
       ```
 
-3. **Authorization**: Copy the JWT token received and click on the "Authorize" button at the top-right corner of the Swagger UI. Paste the token in the "Value" field with the prefix "Bearer ", then click "Authorize" to enable access to secured endpoints.
+3. **Authorization**: Copy the JWT token received and click on the "Authorize" button at the top-right corner of the Swagger UI. Paste the token in the "Value" field, then click "Authorize" to enable access to secured endpoints.
 
 4. **Using Endpoints**: Once authorized, you can use the endpoints as needed. Please note that to create a borrowing record, you must first add books and patrons and obtain their IDs, which you'll provide to the borrowing endpoint.
 
